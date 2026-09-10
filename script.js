@@ -12,12 +12,12 @@ const stickerBeomgyu = document.getElementById("stickerBeomgyu");
 const stickerKai = document.getElementById("stickerKai");
 
 const beomgyuSrc = {
-  wave: "stickers/beomgyu-wave.png",
-  heart: "stickers/beomgyu-heart.png",
+  wave: "stickers/cui-cool.png",
+  heart: "stickers/cui-shout.png",
 };
 const kaiSrc = {
-  plush: "stickers/kai-plush.png",
-  peace: "stickers/kai-peace.png",
+  plush: "stickers/kai-smile.png",
+  peace: "stickers/kai-meme.png",
 };
 
 let quizStep = 0;
@@ -77,15 +77,17 @@ function showStickers(who, poses) {
   if (names.includes("beomgyu")) {
     stickerBeomgyu.src = beomgyuSrc[poses.beomgyu] || beomgyuSrc.wave;
     stickerBeomgyu.classList.add("in");
+    document.body.classList.add("has-cui-sticker");
   }
   if (names.includes("kai")) {
     stickerKai.src = kaiSrc[poses.kai] || kaiSrc.plush;
     stickerKai.classList.add("in");
+    document.body.classList.add("has-kai-sticker");
   }
 }
 
 function finishQuiz() {
-  document.body.classList.remove("in-quiz");
+  document.body.classList.remove("in-quiz", "has-cui-sticker", "has-kai-sticker");
   quiz.hidden = true;
   timeline.hidden = false;
   ending.hidden = false;
