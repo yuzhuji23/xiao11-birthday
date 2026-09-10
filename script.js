@@ -10,6 +10,7 @@ const quizProgress = document.getElementById("quizProgress");
 const quizSay = document.getElementById("quizSay");
 const stickerBeomgyu = document.getElementById("stickerBeomgyu");
 const stickerKai = document.getElementById("stickerKai");
+const stickerFriend = document.getElementById("stickerFriend");
 
 const beomgyuSrc = {
   wave: "stickers/cui-cool.png",
@@ -74,6 +75,16 @@ toQuiz.addEventListener("click", startQuiz);
 
 function showStickers(who, poses) {
   const names = who.split(",").map((item) => item.trim());
+  if (names.includes("friend")) {
+    stickerFriend.classList.add("in");
+    stickerBeomgyu.classList.remove("in");
+    stickerKai.classList.remove("in");
+    document.body.classList.add("has-friend-sticker");
+    document.body.classList.remove("has-cui-sticker", "has-kai-sticker");
+    return;
+  }
+  stickerFriend.classList.remove("in");
+  document.body.classList.remove("has-friend-sticker");
   if (names.includes("beomgyu")) {
     stickerBeomgyu.src = beomgyuSrc[poses.beomgyu] || beomgyuSrc.wave;
     stickerBeomgyu.classList.add("in");
@@ -87,7 +98,12 @@ function showStickers(who, poses) {
 }
 
 function finishQuiz() {
-  document.body.classList.remove("in-quiz", "has-cui-sticker", "has-kai-sticker");
+  document.body.classList.remove(
+    "in-quiz",
+    "has-cui-sticker",
+    "has-kai-sticker",
+    "has-friend-sticker"
+  );
   quiz.hidden = true;
   timeline.hidden = false;
   ending.hidden = false;

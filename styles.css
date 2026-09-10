@@ -355,7 +355,8 @@ body.in-quiz .letter-section {
 
 body.in-quiz .companion,
 body.has-cui-sticker .companion-cui,
-body.has-kai-sticker .companion-kai {
+body.has-kai-sticker .companion-kai,
+body.has-friend-sticker .companion {
   opacity: 0;
   visibility: hidden;
 }
@@ -377,6 +378,10 @@ body.has-kai-sticker .companion-kai {
   text-align: center;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+body.has-friend-sticker .quiz:not([hidden]) {
+  padding-bottom: max(220px, 38vh);
 }
 
 .quiz-progress {
@@ -521,6 +526,16 @@ body.has-kai-sticker .companion-kai {
 
 .sticker-kai.in {
   transform: translateY(4%) rotate(4deg);
+}
+
+.sticker-friend {
+  left: 50%;
+  width: min(46vw, 220px);
+  transform: translate(-50%, 24%) rotate(-2deg);
+}
+
+.sticker-friend.in {
+  transform: translate(-50%, 2%) rotate(-2deg);
 }
 
 .ending-stickers {
@@ -749,6 +764,10 @@ body.has-kai-sticker .companion-kai {
     width: min(34vw, 120px);
   }
 
+  .sticker-friend {
+    width: min(52vw, 168px);
+  }
+
   .frame {
     padding: 8px 8px 12px;
   }
@@ -767,6 +786,10 @@ body.has-kai-sticker .companion-kai {
 
   .sticker {
     width: min(22vw, 96px);
+  }
+
+  .sticker-friend {
+    width: min(28vw, 120px);
   }
 }
 
