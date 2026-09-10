@@ -36,10 +36,63 @@
     <article class="letter-paper">
       <p class="letter-date">九月十一日</p>
       <p class="salute">小11：</p>
-      <p>生日快乐！希望你接下来这一年，吃得好一点，睡得着一点，想做成的事能成几件。</p>
+      <p>生日快乐！希望你接下来这一年，吃得好一点，睡得着一点，想做成的事能多成几件。</p>
       <p class="closing">Happy Yvette's Day</p>
     </article>
-    <a class="continue" href="#timeline">认识你的第三年</a>
+    <a class="continue" href="#quiz" id="toQuiz">
+      <span class="continue-seal">11</span>
+      <span class="continue-label">认识你的第三年</span>
+      <span class="continue-hint">点击这里</span>
+    </a>
+  </section>
+
+  <section class="quiz" id="quiz" hidden>
+    <p class="quiz-progress" id="quizProgress">1 / 4</p>
+
+    <div class="quiz-panel" data-step="0">
+      <p class="quiz-kicker">第一题</p>
+      <h2 class="quiz-q">今天寿星是谁？</h2>
+      <div class="quiz-options">
+        <button type="button" data-say="那必须的。今天是你。" data-show="beomgyu,kai">小11</button>
+        <button type="button" data-say="杋圭可以来给你过，但寿星是你。" data-show="beomgyu">崔杋圭</button>
+        <button type="button" data-say="凯也在，不过今天过生日的是你。" data-show="kai">休宁凯</button>
+      </div>
+    </div>
+
+    <div class="quiz-panel" data-step="1" hidden>
+      <p class="quiz-kicker">第二题</p>
+      <h2 class="quiz-q">今天想先看到谁？</h2>
+      <div class="quiz-options">
+        <button type="button" data-say="杋圭先到。" data-show="beomgyu" data-beomgyu="heart">崔杋圭</button>
+        <button type="button" data-say="凯抱着玩偶来了。" data-show="kai" data-kai="plush">休宁凯</button>
+        <button type="button" data-say="那当然都要。" data-show="beomgyu,kai" data-beomgyu="heart" data-kai="peace">两个都要</button>
+      </div>
+    </div>
+
+    <div class="quiz-panel" data-step="2" hidden>
+      <p class="quiz-kicker">第三题</p>
+      <h2 class="quiz-q">我们认识第几年了？</h2>
+      <div class="quiz-options">
+        <button type="button" data-say="再想想。下面其实写了的。" data-show="beomgyu">第一年</button>
+        <button type="button" data-say="还要再往后一年。" data-show="kai">第二年</button>
+        <button type="button" data-say="嗯，第三年。" data-show="beomgyu,kai">第三年</button>
+      </div>
+    </div>
+
+    <div class="quiz-panel" data-step="3" hidden>
+      <p class="quiz-kicker">最后</p>
+      <h2 class="quiz-q">那现在可以看了吗？</h2>
+      <div class="quiz-options">
+        <button type="button" class="quiz-go" data-say="走吧。" data-show="beomgyu,kai" data-finish="true">看我们的一些日子</button>
+      </div>
+    </div>
+
+    <p class="quiz-say" id="quizSay" hidden></p>
+
+    <div class="stickers" aria-hidden="true">
+      <img class="sticker sticker-beomgyu" id="stickerBeomgyu" src="stickers/beomgyu-wave.png" alt="" />
+      <img class="sticker sticker-kai" id="stickerKai" src="stickers/kai-plush.png" alt="" />
+    </div>
   </section>
 
   <section class="timeline" id="timeline" hidden>
@@ -143,9 +196,15 @@
   </section>
 
   <section class="ending" id="ending" hidden>
+    <div class="ending-stickers" aria-hidden="true">
+      <img src="stickers/beomgyu-heart.png" alt="" />
+      <img src="stickers/kai-peace.png" alt="" />
+    </div>
     <p class="ending-seal">11</p>
     <p class="ending-wish">生日快乐</p>
     <p class="ending-name">江熠泓</p>
+    <p class="ending-txt">tomorrow by together.</p>
+    <p class="ending-txt-cn">明天也一起</p>
     <p class="ending-date">2026.9.11</p>
   </section>
 

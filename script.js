@@ -1,16 +1,33 @@
 const envelope = document.getElementById("envelope");
 const letter = document.getElementById("letter");
+const quiz = document.getElementById("quiz");
 const timeline = document.getElementById("timeline");
 const ending = document.getElementById("ending");
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = lightbox.querySelector("img");
+const toQuiz = document.getElementById("toQuiz");
+const quizProgress = document.getElementById("quizProgress");
+const quizSay = document.getElementById("quizSay");
+const stickerBeomgyu = document.getElementById("stickerBeomgyu");
+const stickerKai = document.getElementById("stickerKai");
+
+const beomgyuSrc = {
+  wave: "stickers/beomgyu-wave.png",
+  heart: "stickers/beomgyu-heart.png",
+};
+const kaiSrc = {
+  plush: "stickers/kai-plush.png",
+  peace: "stickers/kai-peace.png",
+};
+
+let quizStep = 0;
+const quizPanels = [...document.querySelectorAll(".quiz-panel")];
+const quizTotal = quizPanels.length;
+let quizLocked = false;
 
 function revealRest() {
   document.body.classList.add("is-open");
   letter.hidden = false;
-  timeline.hidden = false;
-  ending.hidden = false;
-  observeMoments();
   window.setTimeout(() => {
     letter.scrollIntoView({ behavior: "smooth", block: "start" });
   }, 280);
@@ -32,6 +49,86 @@ envelope.addEventListener("keydown", (event) => {
     event.preventDefault();
     openEnvelope();
   }
+});
+
+function showQuizStep(index) {
+  quizStep = index;
+  quizPanels.forEach((panel, i) => {
+    panel.hidden = i !== index;
+  });
+  quizProgress.textContent = `${index + 1} / ${quizTotal}`;
+  quizSay.hidden = true;
+  quizSay.textContent = "";
+  quizLocked = false;
+}
+
+function startQuiz(event) {
+  event.preventDefault();
+  document.body.classList.add("in-quiz");
+  quiz.hidden = false;
+  showQuizStep(0);
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+toQuiz.addEventListener("click", startQuiz);
+
+function showStickers(who, poses) {
+  const names = who.split(",").map((item) => item.trim());
+  if (names.includes("beomgyu")) {
+    stickerBeomgyu.src = beomgyuSrc[poses.beomgyu] || beomgyuSrc.wave;
+    stickerBeomgyu.classList.add("in");
+  }
+  if (names.includes("kai")) {
+    stickerKai.src = kaiSrc[poses.kai] || kaiSrc.plush;
+    stickerKai.classList.add("in");
+  }
+}
+
+function finishQuiz() {
+  document.body.classList.remove("in-quiz");
+  quiz.hidden = true;
+  timeline.hidden = false;
+  ending.hidden = false;
+  observeMoments();
+  window.setTimeout(() => {
+    timeline.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 80);
+}
+
+quiz.addEventListener("click", (event) => {
+  const button = event.target.closest(".quiz-options button");
+  if (!button || quizLocked) return;
+  quizLocked = true;
+  button.parentElement.querySelectorAll("button").forEach((item) => {
+    item.disabled = true;
+  });
+  showStickers(button.dataset.show || "", {
+    beomgyu: button.dataset.beomgyu,
+    kai: button.dataset.kai,
+  });
+  quizSay.textContent = button.dataset.say || "";
+  quizSay.hidden = false;
+
+  const wait = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ? 200
+    : 1100;
+  window.setTimeout(() => {
+    if (button.dataset.finish) {
+      finishQuiz();
+      return;
+    }
+    const next = quizStep + 1;
+    if (next < quizTotal) {
+      quizPanels[quizStep]
+        .querySelectorAll("button")
+        .forEach((item) => {
+          item.disabled = false;
+        });
+      showQuizStep(next);
+    } else {
+      finishQuiz();
+    }
+  }, wait);
 });
 
 function observeMoments() {
